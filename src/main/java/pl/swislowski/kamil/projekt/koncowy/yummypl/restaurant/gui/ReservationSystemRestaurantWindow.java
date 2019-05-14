@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.controller.ReservationSystemRestaurantController;
-import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.model.RestaurantModel;
 
 public class ReservationSystemRestaurantWindow extends Application {
     public static void main(String[] args) {

@@ -1,6 +1,7 @@
 package pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity;
 
 public class RestaurantInformation {
+    private Long id;
     private String openingHours;
     private Long restaurantId;
 
@@ -10,6 +11,14 @@ public class RestaurantInformation {
     public RestaurantInformation(String openingHours, Long restaurantId) {
         this.openingHours = openingHours;
         this.restaurantId = restaurantId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getOpeningHours() {
