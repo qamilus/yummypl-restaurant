@@ -1,6 +1,7 @@
 package pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity;
 
 public class Location {
+    private Long id;
     private String city;
     private String street;
     private String houseNumber;
@@ -12,6 +13,14 @@ public class Location {
         this.city = city;
         this.street = street;
         this.houseNumber = houseNumber;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCity() {

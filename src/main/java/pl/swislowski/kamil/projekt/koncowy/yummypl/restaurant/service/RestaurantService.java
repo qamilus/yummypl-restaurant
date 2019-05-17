@@ -1,6 +1,7 @@
 package pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.service;
 
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.dao.RestaurantDao;
+import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity.Location;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity.Restaurant;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity.RestaurantInformation;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.model.RestaurantModel;
@@ -37,6 +38,11 @@ public class RestaurantService {
 
                 final String name = restaurant.getName();
                 restaurantModel.setName(name);
+
+                final Location location = restaurant.getLocation();
+                if (location != null) {
+                    restaurantModel.setAddress(location.getCity() + ", " + location.getStreet() + " " + location.getHouseNumber());
+                }
 
                 final RestaurantInformation information = restaurant.getInformation();
                 if (information != null) {
