@@ -26,7 +26,7 @@ public class RestaurantService {
         List<RestaurantModel> restaurantModelList = new ArrayList<>();
         try {
             //delegacja wywołania metody list z DAO.
-            final List<Restaurant> restaurantEntityList = restaurantDao.listWithJoin();
+            final List<Restaurant> restaurantEntityList = restaurantDao.list();
 
             LOGGER.info("RestaurantList from DAO : " + restaurantEntityList);
 
