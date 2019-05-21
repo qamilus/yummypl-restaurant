@@ -51,7 +51,7 @@ public class OrderItem {
     @Override
     public String toString() {
         return "OrderItem{" +
-                "name='" + name + '\'' +
+                "restaurantName='" + name + '\'' +
                 ", price=" + price +
                 ", quantity=" + quantity +
                 ", orderId=" + orderId +

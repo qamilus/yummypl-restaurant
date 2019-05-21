@@ -7,17 +7,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.controller.OrderListController">
    <children>
       <VBox prefHeight="400.0" prefWidth="600.0">
          <children>
-            <TableView prefHeight="200.0" prefWidth="200.0">
+            <TableView fx:id="ordersListTable" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                <TableColumn prefWidth="112.0" text="Nazwa restauracji" />
-                <TableColumn prefWidth="112.0" text="Ilość pozycji" />
-                  <TableColumn prefWidth="112.0" text="Status" />
-                  <TableColumn prefWidth="112.0" text="Adres dostawy" />
+                  <TableColumn fx:id="idColumn" prefWidth="75.0" text="Id" />
+                <TableColumn fx:id="nameColumn" prefWidth="112.0" text="Nazwa restauracji" />
+                <TableColumn fx:id="quantityColumn" prefWidth="112.0" text="Ilość pozycji" />
+                  <TableColumn fx:id="statusColumn" prefWidth="112.0" text="Status" />
+                  <TableColumn fx:id="addressColumn" prefWidth="112.0" text="Adres dostawy" />
               </columns>
             </TableView>
             <HBox prefHeight="100.0" prefWidth="200.0">

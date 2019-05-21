@@ -10,19 +10,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.dao.RestaurantDao;
-import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity.Restaurant;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.model.RestaurantModel;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.service.RestaurantService;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
 
 public class RestaurantListController extends AbstractReservationSystemRestaurantController {
 
+
     private ObservableList<RestaurantModel> restaurants = FXCollections.observableArrayList();
-    private RestaurantService restaurantService;
-    private RestaurantDao restaurantDao;
     @FXML
     private TableView<RestaurantModel> restaurantListTable;
     @FXML
@@ -38,16 +34,19 @@ public class RestaurantListController extends AbstractReservationSystemRestauran
     @FXML
     private Button orderListButton;
 
+    public void setRestaurants(ObservableList<RestaurantModel> restaurants) {
+        this.restaurants = restaurants;
+    }
 
     public void initialize() {
 
-        restaurantDao = new RestaurantDao();
-        restaurantService = new RestaurantService(restaurantDao);
+        RestaurantDao restaurantDao = new RestaurantDao();
+        RestaurantService restaurantService = new RestaurantService(restaurantDao);
 
         restaurants.addAll(restaurantService.list());
 
         idColumn.setCellValueFactory(new PropertyValueFactory<RestaurantModel, String>("id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<RestaurantModel, String>("name"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<RestaurantModel, String>("restaurantName"));
         locationColumn.setCellValueFactory(new PropertyValueFactory<RestaurantModel, String>("address"));
         informationColumn.setCellValueFactory(new PropertyValueFactory<RestaurantModel, String>("information"));
         openingHoursColumn.setCellValueFactory(new PropertyValueFactory<RestaurantModel, String>("openingHours"));
@@ -59,11 +58,12 @@ public class RestaurantListController extends AbstractReservationSystemRestauran
         FXMLLoader loader = new FXMLLoader(OrderListController.class.getClassLoader().getResource("views/orderListView.fxml"));
 
         try {
-
             Stage stage = ReservationSystemRestaurantUtilsController.createStage(loader, primaryStage, "Lista zamówień");
-
             OrderListController controller = loader.getController();
+
             controller.setPrimaryStage(stage);
+//            controller.setSelectedModel(restaurantListTable.getSelectionModel().getSelectedItem());
+            controller.populate(restaurantListTable.getSelectionModel().getSelectedItem());
 
             stage.showAndWait();
 

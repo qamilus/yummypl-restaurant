@@ -1,6 +1,6 @@
 --create table RESTAURANTS(
 --id number,
---name VARCHAR2(100 CHAR),
+--restaurantName VARCHAR2(100 CHAR),
 --menu VARCHAR2(100 CHAR),
 --location VARCHAR2(100 CHAR),
 --information VARCHAR2(100 CHAR)
@@ -50,7 +50,7 @@ VALUES (2, '11-22', 4);
 
 --update RESTAURANTS
 --set id = 3
---where name = 'Nam Ninh';
+--where restaurantName = 'Nam Ninh';
 
 SELECT 
 --*
@@ -239,7 +239,7 @@ JOIN LOCATIONS_TYPE LT
         WHERE LT.ID = 1
         ORDER BY R_ID ASC;
         
-SELECT * 
+SELECT O.ID AS O_ID, R.ID AS R_ID, R.NAME, OI.QUANTITY, OS.NAME AS ORDERS_STATUS,L.ID AS L_ID, L.CITY, L.STREET, L.HOUSE_NUMBER
 FROM ORDERS O
 LEFT JOIN RESTAURANTS R
     ON o.restaurant_id = r.ID
@@ -249,6 +249,8 @@ LEFT JOIN locations_type LT
     ON l.location_type_id = lt.id
 LEFT JOIN ORDERS_STATUS OS
     ON o.order_status_id = os.id
+LEFT JOIN ORDERS_ITEMS OI
+    ON oi.ORDER_ID = o.ID
 WHERE LT.ID = 2
 ;
 

@@ -71,7 +71,7 @@ public class RestaurantDao {
             }
 
         } finally {
-            DatabaseUtils.closeConnection();
+//            DatabaseUtils.closeConnection();
         }
         System.out.println(connection.isClosed());
         return restaurants;

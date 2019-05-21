@@ -61,7 +61,7 @@ public class Restaurant {
     public String toString() {
         return "Restaurant{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", restaurantName='" + name + '\'' +
                 ", menu=" + menu +
                 ", location=" + location +
                 ", information=" + information +

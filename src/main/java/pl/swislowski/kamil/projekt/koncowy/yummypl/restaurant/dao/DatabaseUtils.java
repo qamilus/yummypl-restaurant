@@ -14,6 +14,9 @@ public class DatabaseUtils {
         if (connection == null) {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
         }
+        if (connection.isClosed()) {
+//            connection
+        }
         return connection;
     }
 

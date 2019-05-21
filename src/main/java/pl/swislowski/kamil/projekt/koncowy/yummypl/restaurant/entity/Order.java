@@ -9,6 +9,8 @@ public class Order {
     private Location deliveryLocation;
     private Long restaurantId;
 
+    private Restaurant restaurant;
+
     public Order() {
     }
 
@@ -57,6 +59,14 @@ public class Order {
 
     public void setRestaurantId(Long restaurantId) {
         this.restaurantId = restaurantId;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
     @Override
