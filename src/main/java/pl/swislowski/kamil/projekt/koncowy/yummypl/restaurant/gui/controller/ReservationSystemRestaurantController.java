@@ -23,7 +23,7 @@ public class ReservationSystemRestaurantController extends AbstractReservationSy
 
         try {
 
-            Stage stage = ReservationSystemRestaurantUtilsController.createStage(loader, primaryStage, "Lista obrazów wystawionych na aukcję");
+            Stage stage = ReservationSystemRestaurantUtilsController.createStage(loader, primaryStage, "Lista restauracji");
 
             RestaurantListController controller = loader.getController();
             controller.setPrimaryStage(stage);

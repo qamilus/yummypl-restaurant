@@ -52,10 +52,4 @@ public class OrderListController extends AbstractReservationSystemRestaurantCont
             ordersListTable.setItems(orders);
         }
     }
-
-//    public void setSelectedModel(RestaurantModel restaurantModel) {
-//        this.restaurantModel = restaurantModel;
-//        LOGGER.info(restaurantModel + "");
-//    }
-
 }

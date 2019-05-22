@@ -46,7 +46,7 @@ public class RestaurantListController extends AbstractReservationSystemRestauran
         restaurants.addAll(restaurantService.list());
 
         idColumn.setCellValueFactory(new PropertyValueFactory<RestaurantModel, String>("id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<RestaurantModel, String>("restaurantName"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<RestaurantModel, String>("name"));
         locationColumn.setCellValueFactory(new PropertyValueFactory<RestaurantModel, String>("address"));
         informationColumn.setCellValueFactory(new PropertyValueFactory<RestaurantModel, String>("information"));
         openingHoursColumn.setCellValueFactory(new PropertyValueFactory<RestaurantModel, String>("openingHours"));

@@ -41,7 +41,7 @@ public class OrderDao {
                     order.setStatus(mapOrderStatus(resultSet.getString("ORDERS_STATUS")));
                     order.setItemsCount(resultSet.getInt("ITEMS_COUNT"));
                 }
-//
+
                 final long lId = resultSet.getLong("l_id");
                 if (lId != 0) {
                     Location location = new Location();
@@ -55,8 +55,6 @@ public class OrderDao {
                 orders.add(order);
             }
 
-        } finally {
-//            DatabaseUtils.closeConnection();
         }
         return orders;
     }

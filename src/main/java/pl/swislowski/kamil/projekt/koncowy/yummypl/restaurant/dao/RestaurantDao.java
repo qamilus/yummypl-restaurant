@@ -14,7 +14,7 @@ import java.util.List;
 public class RestaurantDao {
 
     private static final String R_ID = "r_id";
-    private static final String NAME = "name";
+    private static final String NAME = "RESTAURANT_NAME";
 
     private static final String RI_ID = "ri_id";
     private static final String OPENING_HOURS = "opening_hours";
@@ -29,7 +29,7 @@ public class RestaurantDao {
 
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(
-                    "SELECT R.ID AS R_ID, R.NAME, L.ID AS L_ID, L.CITY, L.STREET, L.HOUSE_NUMBER, LT.NAME AS LOCATION_TYPE, RI.ID AS RI_ID, RI.OPENING_HOURS " +
+                    "SELECT R.ID AS R_ID, R.NAME AS RESTAURANT_NAME, L.ID AS L_ID, L.CITY, L.STREET, L.HOUSE_NUMBER, LT.NAME AS LOCATION_TYPE, RI.ID AS RI_ID, RI.OPENING_HOURS " +
                             "FROM RESTAURANTS R " +
                             "LEFT JOIN RESTAURANTS_INFORMATION RI " +
                             "    ON R.ID = RI.RESTAURANT_ID " +
@@ -70,10 +70,7 @@ public class RestaurantDao {
                 restaurants.add(restaurant);
             }
 
-        } finally {
-//            DatabaseUtils.closeConnection();
         }
-        System.out.println(connection.isClosed());
         return restaurants;
     }
 }
