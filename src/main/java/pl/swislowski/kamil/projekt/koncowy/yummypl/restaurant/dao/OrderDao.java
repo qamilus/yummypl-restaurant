@@ -12,21 +12,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDao {
+    
+    private static final String SELECT_SQL =
+            "SELECT O.ID AS O_ID, OS.NAME AS ORDERS_STATUS, L.ID AS L_ID, L.CITY, L.STREET, L.HOUSE_NUMBER, " +
+                    "(SELECT COUNT(*) FROM ORDERS_ITEMS OI2 WHERE OI2.ORDER_ID = O.ID) AS ITEMS_COUNT " +
+                    "FROM ORDERS O " +
+                    "LEFT JOIN locations L " +
+                    "    ON o.location_id = l.id " +
+                    "LEFT JOIN locations_type LT " +
+                    "    ON l.location_type_id = lt.id " +
+                    "LEFT JOIN ORDERS_STATUS OS " +
+                    "    ON o.order_status_id = os.id " +
+                    "WHERE O.RESTAURANT_ID = ?";
 
     public List<Order> list(Long restaurantId) throws SQLException {
         Connection connection = DatabaseUtils.getConnection();
         List<Order> orders = new ArrayList<>();
 
-        try (PreparedStatement statement = connection.prepareStatement(
-                "SELECT O.ID AS O_ID, OS.NAME AS ORDERS_STATUS, L.ID AS L_ID, L.CITY, L.STREET, L.HOUSE_NUMBER " +
-                        "FROM ORDERS O " +
-                        "LEFT JOIN locations L " +
-                        "    ON o.location_id = l.id " +
-                        "LEFT JOIN locations_type LT " +
-                        "    ON l.location_type_id = lt.id " +
-                        "LEFT JOIN ORDERS_STATUS OS " +
-                        "    ON o.order_status_id = os.id " +
-                        "WHERE RESTAURANT_ID = ?")) {
+        try (PreparedStatement statement = connection.prepareStatement(SELECT_SQL)) {
             statement.setLong(1, restaurantId);
             ResultSet resultSet = statement.executeQuery();
 
@@ -36,6 +39,7 @@ public class OrderDao {
                 if (oid != 0) {
                     order.setId(oid);
                     order.setStatus(OrderStatus.NEW);
+                    order.setItemsCount(resultSet.getInt("ITEMS_COUNT"));
                 }
 //
                 final long lId = resultSet.getLong("l_id");

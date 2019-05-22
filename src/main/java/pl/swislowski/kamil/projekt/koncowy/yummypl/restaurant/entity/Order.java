@@ -5,6 +5,7 @@ import java.util.List;
 public class Order {
     private Long id;
     private List<OrderItem> orderItems;
+    private Integer itemsCount;
     private OrderStatus status;
     private Location deliveryLocation;
     private Long restaurantId;
@@ -35,6 +36,14 @@ public class Order {
 
     public void setOrderItems(List<OrderItem> orderItems) {
         this.orderItems = orderItems;
+    }
+
+    public Integer getItemsCount() {
+        return itemsCount;
+    }
+
+    public void setItemsCount(Integer itemsCount) {
+        this.itemsCount = itemsCount;
     }
 
     public OrderStatus getStatus() {

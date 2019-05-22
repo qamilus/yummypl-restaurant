@@ -33,6 +33,7 @@ public class OrderService {
                 final Long id = order.getId();
                 orderModel.setId(String.valueOf(id));
                 orderModel.setRestaurantName(restaurantModel.getName());
+                orderModel.setItemsQuantity(order.getItemsCount() + "");
 
 //                final Restaurant restaurant = order.getRestaurant();
 //                if (restaurant != null) {
