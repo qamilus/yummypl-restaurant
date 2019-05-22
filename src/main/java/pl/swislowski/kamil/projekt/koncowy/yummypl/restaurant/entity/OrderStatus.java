@@ -1,15 +1,11 @@
 package pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity;
 
 public enum OrderStatus {
-    NEW("New"), INPROGRESS, DONE, CANCELED;
+    NEW("New"), IN_PROGRESS("In progress"), DONE("Done"), CANCELED("Canceled");
 
     private String name;
 
-    OrderStatus() {
-    }
-
     OrderStatus(String name) {
-
         this.name = name;
     }
 
