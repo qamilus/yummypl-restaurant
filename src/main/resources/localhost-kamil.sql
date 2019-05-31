@@ -215,7 +215,12 @@ VALUES (ORDERS_ID_SEQ.NEXTVAL, 27, 1, 24);
 SELECT *
 FROM ORDERS;
 
-INSERT INTO ORDERS(ID, ORDER_STATUS_ID, LOCATION_ID, RESTAURANT_ID) VALUES (ORDERS_ID_SEQ.nextval, 1, 26, 3 );
+INSERT INTO ORDERS(ID, ORDER_STATUS_ID, LOCATION_ID, RESTAURANT_ID)
+VALUES (ORDERS_ID_SEQ.nextval, 1, 26, 3);
+
+UPDATE ORDERS
+SET ORDER_STATUS_ID = 3
+WHERE ID = 23;
 
 SELECT *
 FROM orders_items;
@@ -327,7 +332,15 @@ FROM MENU_ITEMS MI
          LEFT JOIN MENU M
                    ON MI.MENU_ID = M.ID;
 
-SELECT O.ID AS O_ID, OS.NAME AS ORDERS_STATUS,OI.NAME, OI.QUANTITY,OI.PRICE, L.ID AS L_ID, L.CITY, L.STREET, L.HOUSE_NUMBER
+SELECT O.ID    AS O_ID,
+       OS.NAME AS ORDERS_STATUS,
+       OI.NAME,
+       OI.QUANTITY,
+       OI.PRICE,
+       L.ID    AS L_ID,
+       L.CITY,
+       L.STREET,
+       L.HOUSE_NUMBER
 FROM ORDERS O
          LEFT JOIN ORDERS_ITEMS OI
                    ON oi.ORDER_ID = o.ID
@@ -353,12 +366,16 @@ WHERE O.RESTAURANT_ID = 24
 GROUP BY OI.ID;
 
 
-SELECT O.ID AS O_ID, OS.NAME AS ORDERS_STATUS,
+SELECT O.ID                                                              AS O_ID,
+       OS.NAME                                                           AS ORDERS_STATUS,
 --        OI.NAME, OI.QUANTITY,OI.PRICE,
-       L.ID AS L_ID, L.CITY, L.STREET, L.HOUSE_NUMBER,
+       L.ID                                                              AS L_ID,
+       L.CITY,
+       L.STREET,
+       L.HOUSE_NUMBER,
        (SELECT COUNT(*) FROM ORDERS_ITEMS OI2 WHERE OI2.ORDER_ID = O.ID) AS ITEMS_COUNT
 FROM ORDERS O
---          LEFT JOIN ORDERS_ITEMS OI
+         --          LEFT JOIN ORDERS_ITEMS OI
 --                    ON oi.ORDER_ID = o.ID
          LEFT JOIN locations L
                    ON o.location_id = l.id
@@ -368,3 +385,17 @@ FROM ORDERS O
                    ON o.order_status_id = os.id
 WHERE O.RESTAURANT_ID = 24;
 -- GROUP BY O.ID, OS.NAME, OI.NAME, OI.QUANTITY, OI.PRICE, L.ID, L.CITY, L.STREET, L.HOUSE_NUMBER;
+
+SELECT *
+FROM ORDERS_ITEMS;
+
+SELECT OI.ID AS OI_ID, OI.NAME, OI.PRICE, OI.QUANTITY, O.ID AS O_ID
+FROM ORDERS_ITEMS OI
+         LEFT JOIN ORDERS O
+                   ON OI.ORDER_ID = O.ID;
+
+SELECT OI.ID AS OI_ID, OI.NAME, OI.PRICE, OI.QUANTITY, O.ID AS O_ID
+FROM ORDERS O
+         LEFT JOIN ORDERS_ITEMS OI
+                   ON OI.ORDER_ID = O.ID
+WHERE O.ID = 21;

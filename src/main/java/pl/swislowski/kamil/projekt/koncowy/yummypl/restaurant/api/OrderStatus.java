@@ -1,4 +1,4 @@
-package pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity;
+package pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.api;
 
 public enum OrderStatus {
     NEW("New"), IN_PROGRESS("In progress"), DONE("Done"), CANCELED("Canceled");
@@ -12,4 +12,9 @@ public enum OrderStatus {
     public String getName() {
         return name;
     }
+
+//    @Override
+//    public String toString() {
+//        return name;
+//    }
 }

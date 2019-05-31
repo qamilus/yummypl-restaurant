@@ -2,7 +2,6 @@ package pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.dao;
 
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity.Location;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity.Order;
-import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity.OrderStatus;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.api.OrderStatusUtils.mapOrderStatus;
 
 public class OrderDao {
 
@@ -25,6 +26,18 @@ public class OrderDao {
                     "    ON o.order_status_id = os.id " +
                     "WHERE O.RESTAURANT_ID = ?";
 
+    private static final String UPDATE_SQL =
+            "UPDATE ORDERS " +
+                    "SET ORDER_STATUS_ID = ? " +
+                    "WHERE ID = ?";
+    private static final String O_ID = "o_id";
+    private static final String ORDERS_STATUS = "ORDERS_STATUS";
+    private static final String ITEMS_COUNT = "ITEMS_COUNT";
+    private static final String L_ID = "l_id";
+    private static final String CITY = "city";
+    private static final String STREET = "street";
+    private static final String HOUSE_NUMBER = "house_number";
+
     public List<Order> list(Long restaurantId) throws SQLException {
         Connection connection = DatabaseUtils.getConnection();
         List<Order> orders = new ArrayList<>();
@@ -34,43 +47,41 @@ public class OrderDao {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                final long oid = resultSet.getLong("o_id");
+                final long oid = resultSet.getLong(O_ID);
                 Order order = new Order();
                 if (oid != 0) {
                     order.setId(oid);
-                    order.setStatus(mapOrderStatus(resultSet.getString("ORDERS_STATUS")));
-                    order.setItemsCount(resultSet.getInt("ITEMS_COUNT"));
+                    order.setStatus(mapOrderStatus(resultSet.getString(ORDERS_STATUS)));
+                    order.setItemsCount(resultSet.getInt(ITEMS_COUNT));
                 }
 
-                final long lId = resultSet.getLong("l_id");
+                final long lId = resultSet.getLong(L_ID);
                 if (lId != 0) {
                     Location location = new Location();
                     location.setId(lId);
-                    location.setCity(resultSet.getString("city"));
-                    location.setStreet(resultSet.getString("street"));
-                    location.setHouseNumber(resultSet.getString("house_number"));
+                    location.setCity(resultSet.getString(CITY));
+                    location.setStreet(resultSet.getString(STREET));
+                    location.setHouseNumber(resultSet.getString(HOUSE_NUMBER));
 
                     order.setDeliveryLocation(location);
                 }
                 orders.add(order);
             }
-
         }
         return orders;
     }
 
-    private OrderStatus mapOrderStatus(String orderStatusName) {
-        if (orderStatusName != null) {
-            if (orderStatusName.toLowerCase().contains("new")) {
-                return OrderStatus.NEW;
-            } else if (orderStatusName.toLowerCase().contains("progress")) {
-                return OrderStatus.IN_PROGRESS;
-            } else if (orderStatusName.toLowerCase().contains("done")) {
-                return OrderStatus.DONE;
-            } else if (orderStatusName.toLowerCase().contains("canceled")) {
-                return OrderStatus.CANCELED;
-            }
+    public void update(Order order) throws SQLException {
+        Connection connection = DatabaseUtils.getConnection();
+
+        long orderStatusId = 3;
+        long orderId = order.getId();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SQL)) {
+            preparedStatement.setLong(1, orderStatusId);
+            preparedStatement.setLong(2, orderId);
+
+            preparedStatement.executeUpdate();
         }
-        return null;
     }
 }

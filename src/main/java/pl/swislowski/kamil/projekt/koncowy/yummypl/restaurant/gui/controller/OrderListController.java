@@ -3,14 +3,19 @@ package pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.api.OrderStatus;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.dao.OrderDao;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.model.OrderModel;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.model.RestaurantModel;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.service.OrderService;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 public class OrderListController extends AbstractReservationSystemRestaurantController {
@@ -18,7 +23,9 @@ public class OrderListController extends AbstractReservationSystemRestaurantCont
     private static final Logger LOGGER = Logger.getLogger(OrderListController.class.getName());
 
     private ObservableList<OrderModel> orders = FXCollections.observableArrayList();
-    private int selectedIndex;
+    private RestaurantModel restaurantModel;
+    private OrderService orderService;
+
     @FXML
     private TableView<OrderModel> ordersListTable;
     @FXML
@@ -31,7 +38,8 @@ public class OrderListController extends AbstractReservationSystemRestaurantCont
     private TableColumn statusColumn;
     @FXML
     private TableColumn addressColumn;
-    private RestaurantModel restaurantModel;
+    @FXML
+    private ComboBox<OrderStatus> updateStatusComboBoxId;
 
     public void initialize() {
         idColumn.setCellValueFactory(new PropertyValueFactory<OrderModel, String>("id"));
@@ -39,6 +47,13 @@ public class OrderListController extends AbstractReservationSystemRestaurantCont
         quantityColumn.setCellValueFactory(new PropertyValueFactory<OrderModel, String>("itemsQuantity"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<OrderModel, String>("status"));
         addressColumn.setCellValueFactory(new PropertyValueFactory<OrderModel, String>("deliveryAddress"));
+
+        ObservableList<OrderStatus> orderStatusList = FXCollections.observableArrayList();
+        orderStatusList.add(OrderStatus.NEW);
+        orderStatusList.add(OrderStatus.IN_PROGRESS);
+        orderStatusList.add(OrderStatus.DONE);
+        orderStatusList.add(OrderStatus.CANCELED);
+        updateStatusComboBoxId.setItems(orderStatusList);
     }
 
     public void populate(RestaurantModel restaurantModel) {
@@ -46,10 +61,42 @@ public class OrderListController extends AbstractReservationSystemRestaurantCont
 
         if (this.restaurantModel != null) {
             OrderDao orderDao = new OrderDao();
-            OrderService orderService = new OrderService(orderDao);
+            orderService = new OrderService(orderDao);
 
             orders.addAll(orderService.list(this.restaurantModel));
             ordersListTable.setItems(orders);
         }
+    }
+
+    public void updateButtonOnAction() {
+        LOGGER.info("Updating order...");
+        OrderModel orderModel = ordersListTable.getSelectionModel().getSelectedItem();
+        OrderStatus orderStatus = updateStatusComboBoxId.getSelectionModel().getSelectedItem();
+
+        if (orderStatus != null) {
+            orderModel.setStatus(orderStatus.getName());
+            ordersListTable.refresh();
+        }
+
+        orderService.update(orderModel);
+    }
+
+    public void detailsOfTheOrderButtonAction() {
+        LOGGER.info("Loading details of the order...");
+
+        FXMLLoader loader = new FXMLLoader(OrderItemListController.class.getClassLoader().getResource("views/orderItemListView.fxml"));
+
+        try {
+            Stage stage = ReservationSystemRestaurantUtilsController.createStage(loader, primaryStage, "Szczegóły zamówienia");
+            OrderItemListController controller = loader.getController();
+
+            OrderModel orderModel = ordersListTable.getSelectionModel().getSelectedItem();
+            controller.populate(orderModel, restaurantModel);
+            controller.setPrimaryStage(stage);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

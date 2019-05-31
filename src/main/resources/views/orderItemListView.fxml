@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.controller.OrderItemListController">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <Label text="Nazwa restauracji : " />
+                  <Label fx:id="restaurantNameLabelId" />
+               </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <Label text="Status zamówienia : " />
+                  <Label fx:id="orderStatusLabelId" />
+               </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <Label text="Adres dostawy : " />
+                  <Label fx:id="deliveryAddressLabelId" />
+               </children>
+            </HBox>
+            <TableView fx:id="orderItemListTable" prefHeight="250.0" prefWidth="500.0">
+              <columns>
+                <TableColumn fx:id="idColumn" prefWidth="75.0" text="Id" />
+                <TableColumn fx:id="nameColumn" prefWidth="128.5" text="Nazwa dania" />
+                  <TableColumn fx:id="priceColumn" text="Cena" />
+                  <TableColumn fx:id="quantityColumn" prefWidth="85.0" text="Ilość" />
+                  <TableColumn fx:id="sumColumn" maxWidth="95.0" minWidth="-1.0" prefWidth="95.0" text="Suma" />
+              </columns>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </TableView>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Zamknij" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -11,5 +11,11 @@
         <property name="v$session.program" value="DataGrip" />
       </driver-properties>
     </data-source>
+    <data-source source="LOCAL" name="postgres-heroku-yummypl" uuid="f0048eee-d2c0-47d8-a20a-61397704e014">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-46-137-187-23.eu-west-1.compute.amazonaws.com:5432/d2tm1rok342quh</jdbc-url>
+    </data-source>
   </component>
 </project>

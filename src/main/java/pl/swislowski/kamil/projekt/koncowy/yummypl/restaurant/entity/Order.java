@@ -1,5 +1,7 @@
 package pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity;
 
+import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.api.OrderStatus;
+
 import java.util.List;
 
 public class Order {

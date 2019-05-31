@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -31,12 +30,6 @@ public class RestaurantListController extends AbstractReservationSystemRestauran
     private TableColumn informationColumn;
     @FXML
     private TableColumn openingHoursColumn;
-    @FXML
-    private Button orderListButton;
-
-    public void setRestaurants(ObservableList<RestaurantModel> restaurants) {
-        this.restaurants = restaurants;
-    }
 
     public void initialize() {
 
@@ -62,7 +55,6 @@ public class RestaurantListController extends AbstractReservationSystemRestauran
             OrderListController controller = loader.getController();
 
             controller.setPrimaryStage(stage);
-//            controller.setSelectedModel(restaurantListTable.getSelectionModel().getSelectedItem());
             controller.populate(restaurantListTable.getSelectionModel().getSelectedItem());
 
             stage.showAndWait();

@@ -1,5 +1,6 @@
 package pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.service;
 
+import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.api.OrderStatusUtils;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.dao.OrderDao;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity.Location;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity.Order;
@@ -9,8 +10,11 @@ import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.model.Restaura
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class OrderService {
+
+    private static final Logger LOGGER = Logger.getLogger(OrderService.class.getName());
 
     private OrderDao orderDao;
 
@@ -34,35 +38,33 @@ public class OrderService {
                 orderModel.setId(String.valueOf(id));
                 orderModel.setRestaurantName(restaurantModel.getName());
                 orderModel.setItemsQuantity(order.getItemsCount() + "");
-
-//                final Restaurant restaurant = order.getRestaurant();
-//                if (restaurant != null) {
-//                    orderModel.setRestaurantName(restaurant.getRestaurantName());
-//                }
-
-//                final List<OrderItem> orderItems = order.getOrderItems();
-//                if (orderItems != null) {
-//                    for (OrderItem orderItem : orderItems) {
-//                        final Integer quantity = orderItem.getQuantity();
-//                        orderModel.setItemsQuantity(String.valueOf(quantity));
-//                    }
-//                }
-
                 orderModel.setStatus(order.getStatus().getName());
 
                 final Location location = order.getDeliveryLocation();
                 if (location != null) {
                     orderModel.setDeliveryAddress(location.getCity() + ", " + location.getStreet() + " " + location.getHouseNumber());
                 }
-
                 orderModelList.add(orderModel);
             }
-
         } catch (
                 SQLException e) {
             e.printStackTrace();
         }
-
         return orderModelList;
+    }
+
+    public void update(OrderModel orderModel) {
+        LOGGER.info("Updating model...");
+        if (orderModel != null) {
+            Order order = new Order();
+            order.setId(Long.valueOf(orderModel.getId()));
+            order.setStatus(OrderStatusUtils.mapOrderStatus(orderModel.getStatus()));
+
+            try {
+                orderDao.update(order);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

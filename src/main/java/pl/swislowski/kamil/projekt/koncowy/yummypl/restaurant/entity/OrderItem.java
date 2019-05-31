@@ -1,6 +1,7 @@
 package pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity;
 
 public class OrderItem {
+    private Long id;
     private String name;
     private Double price;
     private Integer quantity;
@@ -9,11 +10,27 @@ public class OrderItem {
     public OrderItem() {
     }
 
+    public OrderItem(Long id, String name, Double price, Integer quantity, Long orderId) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.orderId = orderId;
+    }
+
     public OrderItem(String name, Double price, Integer quantity, Long orderId) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.orderId = orderId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
