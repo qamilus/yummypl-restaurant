@@ -68,4 +68,8 @@ public class OrderItemListController extends AbstractReservationSystemRestaurant
             orderItemListTable.setItems(orderItems);
         }
     }
+
+    public void closeButtonAction(){
+        primaryStage.close();
+    }
 }

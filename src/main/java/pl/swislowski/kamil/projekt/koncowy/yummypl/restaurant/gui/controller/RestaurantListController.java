@@ -62,6 +62,24 @@ public class RestaurantListController extends AbstractReservationSystemRestauran
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public void addNewRestaurantButtonAction(){
+        FXMLLoader loader = new FXMLLoader(OrderListController.class.getClassLoader().getResource("views/restaurantAddView.fxml"));
+        try {
+            Stage stage = ReservationSystemRestaurantUtilsController.createStage(loader, primaryStage, "Dodawanie nowej restauracji");
+            RestaurantAddController controller = loader.getController();
+
+            controller.setPrimaryStage(stage);
+
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void closeButtonAction(){
+        primaryStage.close();
     }
 }

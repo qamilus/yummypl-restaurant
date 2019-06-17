@@ -45,7 +45,7 @@
             </TableView>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Zamknij" />
+                  <Button mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="25.0" prefWidth="85.0" text="Zamknij" />
                </children>
             </HBox>
          </children>

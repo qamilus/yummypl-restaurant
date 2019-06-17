@@ -24,8 +24,9 @@
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <ComboBox fx:id="updateStatusComboBoxId" prefWidth="150.0" />
-                  <Button mnemonicParsing="false" onAction="#updateButtonOnAction" text="Zmiana Statusu" />
-                  <Button mnemonicParsing="false" onAction="#detailsOfTheOrderButtonAction" text="Szczegóły zamówienia" />
+                  <Button fx:id="changeOfStatusButton" mnemonicParsing="false" onAction="#updateButtonOnAction" text="Zmiana Statusu" />
+                  <Button fx:id="orderDetailsButton" mnemonicParsing="false" onAction="#detailsOfTheOrderButtonAction" text="Szczegóły zamówienia" />
+                  <Button mnemonicParsing="false" onAction="#closeButtonAction" text="Zamknij" />
                </children>
             </HBox>
          </children>

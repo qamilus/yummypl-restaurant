@@ -35,5 +35,9 @@ public class ReservationSystemRestaurantController extends AbstractReservationSy
         }
     }
 
+    public void closeButtonAction(){
+        primaryStage.close();
+    }
+
 
 }

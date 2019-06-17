@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -40,6 +41,10 @@ public class OrderListController extends AbstractReservationSystemRestaurantCont
     private TableColumn addressColumn;
     @FXML
     private ComboBox<OrderStatus> updateStatusComboBoxId;
+    @FXML
+    private Button changeOfStatusButton;
+    @FXML
+    private Button orderDetailsButton;
 
     public void initialize() {
         idColumn.setCellValueFactory(new PropertyValueFactory<OrderModel, String>("id"));
@@ -54,6 +59,14 @@ public class OrderListController extends AbstractReservationSystemRestaurantCont
         orderStatusList.add(OrderStatus.DONE);
         orderStatusList.add(OrderStatus.CANCELED);
         updateStatusComboBoxId.setItems(orderStatusList);
+
+        if (orders.size() == 0) {
+            updateStatusComboBoxId.setDisable(true);
+            changeOfStatusButton.setDisable(true);
+            orderDetailsButton.setDisable(true);
+        } else {
+            LOGGER.info("Loaded list of orders.");
+        }
     }
 
     public void populate(RestaurantModel restaurantModel) {
@@ -97,6 +110,9 @@ public class OrderListController extends AbstractReservationSystemRestaurantCont
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public void closeButtonAction() {
+        primaryStage.close();
     }
 }
