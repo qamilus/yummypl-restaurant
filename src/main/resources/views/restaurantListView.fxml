@@ -17,7 +17,6 @@
                 <TableColumn fx:id="idColumn" prefWidth="75.0" text="Id" />
                 <TableColumn fx:id="nameColumn" prefWidth="107.0" text="Nazwa restauracji" />
                   <TableColumn fx:id="locationColumn" minWidth="8.5" prefWidth="179.5" text="Lokalizacja" />
-                  <TableColumn fx:id="informationColumn" minWidth="0.0" prefWidth="133.5" text="Informacje dodatkowe" />
                   <TableColumn fx:id="openingHoursColumn" prefWidth="104.0" text="Godziny otwarcia" />
               </columns>
             </TableView>

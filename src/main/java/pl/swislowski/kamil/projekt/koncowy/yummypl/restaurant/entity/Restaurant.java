@@ -63,7 +63,7 @@ public class Restaurant {
                 "id=" + id +
                 ", restaurantName='" + name + '\'' +
                 ", menu=" + menu +
-                ", location=" + location +
+                ", locationModel=" + location +
                 ", information=" + information +
                 '}';
     }

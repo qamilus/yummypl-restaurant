@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class LocationModelNew {
+public class LocationModel {
+    private String id;
     private String city;
     private String street;
     private String houseNumber;

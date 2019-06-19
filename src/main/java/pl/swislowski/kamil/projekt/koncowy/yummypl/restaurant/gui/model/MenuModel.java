@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MenuModelNew {
+public class MenuModel {
     private String name;
     private int numberOfItems;
 }

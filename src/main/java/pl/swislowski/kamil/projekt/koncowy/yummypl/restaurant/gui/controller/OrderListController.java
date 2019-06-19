@@ -59,14 +59,17 @@ public class OrderListController extends AbstractReservationSystemRestaurantCont
         orderStatusList.add(OrderStatus.DONE);
         orderStatusList.add(OrderStatus.CANCELED);
         updateStatusComboBoxId.setItems(orderStatusList);
+        updateStatusComboBoxId.getSelectionModel().selectFirst();
 
-        if (orders.size() == 0) {
-            updateStatusComboBoxId.setDisable(true);
-            changeOfStatusButton.setDisable(true);
-            orderDetailsButton.setDisable(true);
-        } else {
-            LOGGER.info("Loaded list of orders.");
-        }
+        changeOfStatusButton.setDisable(true);
+        orderDetailsButton.setDisable(true);
+
+        ordersListTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                changeOfStatusButton.setDisable(false);
+                orderDetailsButton.setDisable(false);
+            }
+        });
     }
 
     public void populate(RestaurantModel restaurantModel) {
@@ -91,20 +94,44 @@ public class OrderListController extends AbstractReservationSystemRestaurantCont
             ordersListTable.refresh();
         }
 
-        orderService.update(orderModel);
+        if (orderModel != null) {
+            orderService.update(orderModel);
+        }
     }
 
     public void detailsOfTheOrderButtonAction() {
         LOGGER.info("Loading details of the order...");
 
-        FXMLLoader loader = new FXMLLoader(OrderItemListController.class.getClassLoader().getResource("views/orderItemListView.fxml"));
+        OrderModel orderModel = ordersListTable.getSelectionModel().getSelectedItem();
+
+        if (orderModel != null) {
+            FXMLLoader loader = new FXMLLoader(OrderItemListController.class.getClassLoader().getResource("views/orderItemListView.fxml"));
+
+            try {
+                Stage stage = ReservationSystemRestaurantUtilsController.createStage(loader, primaryStage, "Szczegóły zamówienia");
+                OrderItemListController controller = loader.getController();
+
+                controller.populate(orderModel, restaurantModel);
+                controller.setPrimaryStage(stage);
+                stage.showAndWait();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void addNewOrderButtonAction() {
+        LOGGER.info("Adding new order...");
+
+        FXMLLoader loader = new FXMLLoader(OrderItemListController.class.getClassLoader().getResource("views/orderAddView.fxml"));
 
         try {
-            Stage stage = ReservationSystemRestaurantUtilsController.createStage(loader, primaryStage, "Szczegóły zamówienia");
-            OrderItemListController controller = loader.getController();
+            Stage stage = ReservationSystemRestaurantUtilsController.createStage(loader, primaryStage, "Dodawanie nowego zamówienia:");
+            OrderAddController controller = loader.getController();
 
             OrderModel orderModel = ordersListTable.getSelectionModel().getSelectedItem();
-            controller.populate(orderModel, restaurantModel);
+//            controller.populate(orderModel, restaurantModel);
+
             controller.setPrimaryStage(stage);
             stage.showAndWait();
         } catch (IOException e) {

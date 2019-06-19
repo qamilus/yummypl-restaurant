@@ -2,7 +2,7 @@
 --id number,
 --restaurantName VARCHAR2(100 CHAR),
 --menu VARCHAR2(100 CHAR),
---location VARCHAR2(100 CHAR),
+--locationModel VARCHAR2(100 CHAR),
 --information VARCHAR2(100 CHAR)
 --);
 

@@ -8,59 +8,69 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.controller.RestaurantAddController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox prefHeight="50.0" prefWidth="200.0">
                <children>
-                  <Label text="id">
-                     <HBox.margin>
-                        <Insets left="40.0" top="25.0" />
-                     </HBox.margin>
-                  </Label>
-                  <TextField fx:id="idTextField">
-                     <HBox.margin>
-                        <Insets left="145.0" top="25.0" />
-                     </HBox.margin>
-                  </TextField>
-               </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </HBox>
-            <HBox prefHeight="50.0" prefWidth="200.0">
-               <children>
-                  <Label text="nazwa restauracji">
+                  <Label text="Nazwa restauracji:">
                      <HBox.margin>
                         <Insets left="40.0" top="25.0" />
                      </HBox.margin>
                   </Label>
                   <TextField fx:id="nameTextField">
                      <HBox.margin>
-                        <Insets left="65.0" top="25.0" />
+                        <Insets left="62.0" top="25.0" />
                      </HBox.margin>
                   </TextField>
                </children>
             </HBox>
             <HBox prefHeight="50.0" prefWidth="200.0">
                <children>
-                  <Label text="lokalizacja">
+                  <Label text="Miasto:">
                      <HBox.margin>
                         <Insets left="40.0" top="25.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="locationTextField">
+                  <TextField fx:id="locationCityTextField">
                      <HBox.margin>
-                        <Insets left="100.0" top="25.0" />
+                        <Insets left="118.0" top="25.0" />
                      </HBox.margin>
                   </TextField>
                </children>
             </HBox>
             <HBox prefHeight="50.0" prefWidth="200.0">
                <children>
-                  <Label text="informacje dodatkowe">
+                  <Label text="Ulica:">
+                     <HBox.margin>
+                        <Insets left="40.0" top="25.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="locationStreetTextField">
+                     <HBox.margin>
+                        <Insets left="125.0" top="25.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <Label text="Numer budynku/lokalu:">
+                     <HBox.margin>
+                        <Insets left="40.0" top="25.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="locationHouseNumberTextField">
+                     <HBox.margin>
+                        <Insets left="30.0" top="25.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <Label text="Informacje dodatkowe:">
                      <HBox.margin>
                         <Insets left="40.0" top="25.0" />
                      </HBox.margin>
@@ -74,7 +84,7 @@
             </HBox>
             <HBox prefHeight="50.0" prefWidth="200.0">
                <children>
-                  <Label text="godziny otwarcia">
+                  <Label text="Godziny otwarcia:">
                      <HBox.margin>
                         <Insets left="40.0" top="25.0" />
                      </HBox.margin>
@@ -88,7 +98,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" text="Zapisz">
+                  <Button mnemonicParsing="false" onAction="#saveRestaurantButtonOnAction" text="Zapisz">
                      <HBox.margin>
                         <Insets left="40.0" right="40.0" top="25.0" />
                      </HBox.margin>

@@ -5,6 +5,7 @@ import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity.Restaurant;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity.RestaurantInformation;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -23,8 +24,13 @@ public class RestaurantDao {
     private static final String STREET = "street";
     private static final String HOUSE_NUMBER = "house_number";
 
+    private static final String INSERT_SQL =
+            "INSERT INTO RESTAURANTS(ID, NAME, LOCATION_ID) VALUES (nextval('RESTAURANTS_ID_SEQ'), ?, ?) ";
+
+    private Connection connection;
+
     public List<Restaurant> list() throws SQLException {
-        Connection connection = DatabaseUtils.getConnection();
+        connection = DatabaseUtils.getConnection();
         List<Restaurant> restaurants = new ArrayList<>();
 
         try (Statement statement = connection.createStatement()) {
@@ -69,8 +75,30 @@ public class RestaurantDao {
 
                 restaurants.add(restaurant);
             }
-
         }
         return restaurants;
+    }
+
+    public long create(Restaurant restaurant, Location location) {
+        long generatedId = -1;
+
+        try {
+            connection = DatabaseUtils.getConnection();
+
+            PreparedStatement statement = connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, restaurant.getName());
+            statement.setLong(2, location.getId());
+
+            statement.execute();
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+
+            if (generatedKeys.next()) {
+                generatedId = generatedKeys.getLong(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return generatedId;
     }
 }

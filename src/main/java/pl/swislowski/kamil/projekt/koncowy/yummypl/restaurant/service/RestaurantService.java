@@ -1,10 +1,15 @@
 package pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.service;
 
+import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.dao.LocationDao;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.dao.RestaurantDao;
+import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.dao.RestaurantInformationDao;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity.Location;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity.Restaurant;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity.RestaurantInformation;
+import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.model.LocationModel;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.model.RestaurantModel;
+import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.service.mapper.LocationModelMapper;
+import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.service.mapper.RestaurantModelMapper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,6 +22,8 @@ public class RestaurantService {
     private static final Logger LOGGER = Logger.getLogger(RestaurantService.class.getName());
     //kompozycja wykorzystująca implementację DAO.
     private RestaurantDao restaurantDao;
+    private LocationDao locationDao;
+    private RestaurantInformationDao restaurantInformationDao;
 
     public RestaurantService(RestaurantDao restaurantDao) {
         this.restaurantDao = restaurantDao;
@@ -41,6 +48,8 @@ public class RestaurantService {
 
                 final Location location = restaurant.getLocation();
                 if (location != null) {
+                    LocationModel locationModel = LocationModelMapper.fromEntity(location);
+                    restaurantModel.setLocationModel(locationModel);
                     restaurantModel.setAddress(location.getCity() + ", " + location.getStreet() + " " + location.getHouseNumber());
                 }
 
@@ -56,5 +65,24 @@ public class RestaurantService {
             e.printStackTrace();
         }
         return restaurantModelList;
+    }
+
+    public void create(RestaurantModel restaurantModel) {
+        Restaurant restaurant = RestaurantModelMapper.toEntity(restaurantModel);
+        Location location = LocationModelMapper.toEntity(restaurantModel.getLocationModel());
+
+        long locationId = locationDao.create(location);
+        location.setId(locationId);
+
+        long restaurantId = restaurantDao.create(restaurant, location);
+
+    }
+
+    public void setLocationDao(LocationDao locationDao) {
+        this.locationDao = locationDao;
+    }
+
+    public void setRestaurantInformationDao(RestaurantInformationDao restaurantInformationDao) {
+        this.restaurantInformationDao = restaurantInformationDao;
     }
 }

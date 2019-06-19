@@ -13,4 +13,7 @@ public class RestaurantModel {
     private String address;
     private String information;
     private String openingHours;
+
+    private LocationModel locationModel;
+    private RestaurantInformationModel restaurantInformationModel;
 }

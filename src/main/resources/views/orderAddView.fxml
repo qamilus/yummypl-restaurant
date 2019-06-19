@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.controller.OrderAddController">
+   <children>
+      <HBox layoutX="110.0" layoutY="41.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <VBox prefHeight="250.0" prefWidth="150.0">
+               <children>
+                  <Label text="Id">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="35.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Nazwa restauracji">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="35.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Ilość pozycji">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="35.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Status zamówienia">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="35.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Adres dostawy">
+                     <VBox.margin>
+                        <Insets left="35.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="250.0" prefWidth="150.0">
+               <children>
+                  <TextField>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField>
+                     <VBox.margin>
+                        <Insets bottom="13.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Button layoutX="24.0" layoutY="250.0" mnemonicParsing="false" onAction="#saveButtonAction" text="Zapisz" AnchorPane.rightAnchor="526.5" />
+      <Button layoutX="107.0" layoutY="250.0" mnemonicParsing="false" onAction="#closeButtonAction" text="Zamknij" />
+   </children>
+</AnchorPane>

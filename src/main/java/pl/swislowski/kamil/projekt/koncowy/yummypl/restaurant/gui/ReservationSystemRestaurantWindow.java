@@ -28,7 +28,6 @@ public class ReservationSystemRestaurantWindow extends Application {
         primaryStage.setTitle("Okno powitalne");
         primaryStage.setScene(new Scene(root, 400, 600));
         primaryStage.show();
-
     }
 
     @Override

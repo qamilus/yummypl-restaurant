@@ -38,6 +38,8 @@ public class OrderDao {
     private static final String STREET = "street";
     private static final String HOUSE_NUMBER = "house_number";
 
+    private OrderStatusDao orderStatusDao = new OrderStatusDao();
+
     public List<Order> list(Long restaurantId) throws SQLException {
         Connection connection = DatabaseUtils.getConnection();
         List<Order> orders = new ArrayList<>();
@@ -74,8 +76,8 @@ public class OrderDao {
     public void update(Order order) throws SQLException {
         Connection connection = DatabaseUtils.getConnection();
 
-        long orderStatusId = 3;
         long orderId = order.getId();
+        long orderStatusId = orderStatusDao.select(order.getStatus().getName());
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SQL)) {
             preparedStatement.setLong(1, orderStatusId);
