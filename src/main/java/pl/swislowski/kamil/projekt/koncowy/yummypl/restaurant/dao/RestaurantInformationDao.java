@@ -22,7 +22,7 @@ public class RestaurantInformationDao {
 
             PreparedStatement statement = connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, restaurantInformation.getOpeningHours());
-            statement.setLong(2, restaurantInformation.getId());
+            statement.setLong(2, restaurantInformation.getRestaurantId());
 
             statement.execute();
             ResultSet generatedKeys = statement.getGeneratedKeys();

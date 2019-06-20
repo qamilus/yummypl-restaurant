@@ -6,6 +6,7 @@ import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.dao.LocationDao;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.dao.RestaurantDao;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.dao.RestaurantInformationDao;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.model.LocationModel;
+import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.model.RestaurantInformationModel;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.model.RestaurantModel;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.service.RestaurantService;
 
@@ -41,6 +42,10 @@ public class RestaurantAddController extends AbstractReservationSystemRestaurant
         locationModel.setStreet(locationStreetTextField.getText());
         locationModel.setHouseNumber(locationHouseNumberTextField.getText());
         restaurantModel.setLocationModel(locationModel);
+
+        RestaurantInformationModel restaurantInformationModel = new RestaurantInformationModel();
+        restaurantInformationModel.setOpeningHours(openningHoursTextField.getText());
+        restaurantModel.setRestaurantInformationModel(restaurantInformationModel);
 
         restaurantService.create(restaurantModel);
 

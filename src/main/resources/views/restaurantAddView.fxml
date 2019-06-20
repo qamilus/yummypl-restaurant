@@ -70,20 +70,6 @@
             </HBox>
             <HBox prefHeight="50.0" prefWidth="200.0">
                <children>
-                  <Label text="Informacje dodatkowe:">
-                     <HBox.margin>
-                        <Insets left="40.0" top="25.0" />
-                     </HBox.margin>
-                  </Label>
-                  <TextField fx:id="informationTextField">
-                     <HBox.margin>
-                        <Insets left="35.0" top="25.0" />
-                     </HBox.margin>
-                  </TextField>
-               </children>
-            </HBox>
-            <HBox prefHeight="50.0" prefWidth="200.0">
-               <children>
                   <Label text="Godziny otwarcia:">
                      <HBox.margin>
                         <Insets left="40.0" top="25.0" />

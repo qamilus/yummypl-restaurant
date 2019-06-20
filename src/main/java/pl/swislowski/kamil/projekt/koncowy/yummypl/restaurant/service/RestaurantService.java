@@ -9,6 +9,7 @@ import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity.RestaurantI
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.model.LocationModel;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.model.RestaurantModel;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.service.mapper.LocationModelMapper;
+import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.service.mapper.RestaurantInformationMapper;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.service.mapper.RestaurantModelMapper;
 
 import java.sql.SQLException;
@@ -70,12 +71,16 @@ public class RestaurantService {
     public void create(RestaurantModel restaurantModel) {
         Restaurant restaurant = RestaurantModelMapper.toEntity(restaurantModel);
         Location location = LocationModelMapper.toEntity(restaurantModel.getLocationModel());
+        RestaurantInformation restaurantInformation =
+                RestaurantInformationMapper.toEntity(restaurantModel.getRestaurantInformationModel());
 
         long locationId = locationDao.create(location);
         location.setId(locationId);
 
         long restaurantId = restaurantDao.create(restaurant, location);
+        restaurantInformation.setRestaurantId(restaurantId);
 
+        restaurantInformationDao.create(restaurantInformation);
     }
 
     public void setLocationDao(LocationDao locationDao) {
