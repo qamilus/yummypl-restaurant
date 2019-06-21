@@ -10,7 +10,7 @@
     <children>
         <VBox prefHeight="400.0" prefWidth="600.0">
             <children>
-                <TextArea prefHeight="200.0" prefWidth="200.0" />
+                <TextArea prefHeight="200.0" prefWidth="200.0" text="yummy.pl - aplikacja restauratora&#10;" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                       <Button fx:id="startButton" onAction="#startButtonOnAction" text="Start" />

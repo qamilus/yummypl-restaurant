@@ -14,8 +14,13 @@ import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.model.Restaura
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.service.RestaurantService;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 public class RestaurantListController extends AbstractReservationSystemRestaurantController {
+
+    private static final Logger LOGGER = Logger.getLogger(RestaurantListController.class.getName());
+
+    private RestaurantService restaurantService;
 
     private ObservableList<RestaurantModel> restaurants = FXCollections.observableArrayList();
     @FXML
@@ -34,7 +39,7 @@ public class RestaurantListController extends AbstractReservationSystemRestauran
     public void initialize() {
 
         RestaurantDao restaurantDao = new RestaurantDao();
-        RestaurantService restaurantService = new RestaurantService(restaurantDao);
+        restaurantService = new RestaurantService(restaurantDao);
 
         restaurants.addAll(restaurantService.list());
 
@@ -80,6 +85,10 @@ public class RestaurantListController extends AbstractReservationSystemRestauran
 
             stage.showAndWait();
 
+            restaurants = FXCollections.observableArrayList();
+            restaurants.addAll(restaurantService.list());
+            restaurantListTable.setItems(restaurants);
+            restaurantListTable.refresh();
         } catch (IOException e) {
             e.printStackTrace();
         }
