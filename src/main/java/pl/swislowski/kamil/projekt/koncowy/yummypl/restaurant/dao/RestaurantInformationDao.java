@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * @author Kamil Swislowski
+ */
 public class RestaurantInformationDao {
 
     private static final String INSERT_SQL =

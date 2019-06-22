@@ -10,6 +10,9 @@ import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.controller.Res
 
 import java.util.logging.Logger;
 
+/**
+ * @author Kamil Swislowski
+ */
 public class ReservationSystemRestaurantWindow extends Application {
 
     private static final Logger LOGGER = Logger.getLogger(ReservationSystemRestaurantWindow.class.getName());

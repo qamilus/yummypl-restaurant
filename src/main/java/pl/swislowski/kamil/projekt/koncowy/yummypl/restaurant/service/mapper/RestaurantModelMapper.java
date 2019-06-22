@@ -4,6 +4,9 @@ import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity.Location;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity.Restaurant;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.model.RestaurantModel;
 
+/**
+ * @author Kamil Swislowski
+ */
 public class RestaurantModelMapper {
 
     public static Restaurant toEntity(RestaurantModel restaurantModel) {

@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.logging.Logger;
 
+/**
+ * @author Kamil Swislowski
+ */
 public class ReservationSystemRestaurantController extends AbstractReservationSystemRestaurantController{
     private static final Logger LOGGER = Logger.getLogger(ReservationSystemRestaurantController.class.getName());
 

@@ -1,5 +1,8 @@
 package pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity;
 
+/**
+ * @author Kamil Swislowski
+ */
 public class Restaurant {
     private Long id;
     private String name;

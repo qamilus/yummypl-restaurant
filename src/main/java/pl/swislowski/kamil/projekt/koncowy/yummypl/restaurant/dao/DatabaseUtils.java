@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
+/**
+ * @author Kamil Swislowski
+ */
 public class DatabaseUtils {
     private static final Logger LOGGER = Logger.getLogger(DatabaseUtils.class.getName());
 

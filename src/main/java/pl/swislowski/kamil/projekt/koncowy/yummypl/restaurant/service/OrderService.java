@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * @author Kamil Swislowski
+ */
 public class OrderService {
 
     private static final Logger LOGGER = Logger.getLogger(OrderService.class.getName());

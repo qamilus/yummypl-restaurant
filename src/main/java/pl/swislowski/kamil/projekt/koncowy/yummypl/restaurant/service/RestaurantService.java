@@ -19,6 +19,9 @@ import java.util.logging.Logger;
 
 //S.O.L.I.D.
 //S(single responsibility) - RestaurantService jest odpowiedzialny tylko i wyłącznie za przekazywanie danych.
+/**
+ * @author Kamil Swislowski
+ */
 public class RestaurantService {
     private static final Logger LOGGER = Logger.getLogger(RestaurantService.class.getName());
     //kompozycja wykorzystująca implementację DAO.

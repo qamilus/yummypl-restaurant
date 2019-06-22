@@ -3,6 +3,9 @@ package pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.service.mapper;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity.Location;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.model.LocationModel;
 
+/**
+ * @author Kamil Swislowski
+ */
 public class LocationModelMapper {
 
     public static Location toEntity(LocationModel locationModel) {

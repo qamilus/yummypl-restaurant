@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Kamil Swislowski
+ */
 public class OrderItemDao {
 
     private static final String SELECT_SQL =

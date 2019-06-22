@@ -4,6 +4,9 @@ import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.api.OrderStatus;
 
 import java.util.List;
 
+/**
+ * @author Kamil Swislowski
+ */
 public class Order {
     private Long id;
     private List<OrderItem> orderItems;

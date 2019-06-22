@@ -2,6 +2,9 @@ package pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity;
 
 import java.util.List;
 
+/**
+ * @author Kamil Swislowski
+ */
 public class Menu {
     private Long id;
     private List<MenuItem> menuItems;

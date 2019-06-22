@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * @author Kamil Swislowski
+ */
 public class OrderStatusDao {
     private static final String SELECT_SQL = "SELECT id FROM orders_status WHERE UPPER(name) LIKE UPPER(?)";
 

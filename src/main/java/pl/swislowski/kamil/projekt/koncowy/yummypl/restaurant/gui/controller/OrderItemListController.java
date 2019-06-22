@@ -15,6 +15,9 @@ import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.service.OrderItemS
 
 import java.util.logging.Logger;
 
+/**
+ * @author Kamil Swislowski
+ */
 public class OrderItemListController extends AbstractReservationSystemRestaurantController {
 
     private static final Logger LOGGER = Logger.getLogger(OrderListController.class.getName());

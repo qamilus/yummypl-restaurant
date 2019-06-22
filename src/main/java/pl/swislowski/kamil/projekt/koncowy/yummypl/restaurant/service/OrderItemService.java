@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * @author Kamil Swislowski
+ */
 public class OrderItemService {
 
     private static final Logger LOGGER = Logger.getLogger(OrderItemService.class.getName());
@@ -47,7 +50,6 @@ public class OrderItemService {
                 Integer quantity = orderItem.getQuantity();
                 orderItemModel.setQuantity(String.valueOf(quantity));
 
-//                double sum = price * quantity;
                 BigDecimal priceBigDecimal = new BigDecimal(price);
                 BigDecimal sum = priceBigDecimal.multiply(new BigDecimal(quantity));
                 BigDecimal sumScale = sum.setScale(2, BigDecimal.ROUND_HALF_UP);

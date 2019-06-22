@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * @author Kamil Swislowski
+ */
 public class ReservationSystemRestaurantUtilsController {
 
     public static Stage createStage(FXMLLoader loader, Stage primaryStage, String title) throws IOException {

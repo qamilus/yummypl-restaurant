@@ -16,6 +16,9 @@ import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.service.Restaurant
 import java.io.IOException;
 import java.util.logging.Logger;
 
+/**
+ * @author Kamil Swislowski
+ */
 public class RestaurantListController extends AbstractReservationSystemRestaurantController {
 
     private static final Logger LOGGER = Logger.getLogger(RestaurantListController.class.getName());

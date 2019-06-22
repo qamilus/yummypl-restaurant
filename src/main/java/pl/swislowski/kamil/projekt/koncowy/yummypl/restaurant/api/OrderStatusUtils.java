@@ -1,5 +1,8 @@
 package pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.api;
 
+/**
+ * @author Kamil Swislowski
+ */
 public class OrderStatusUtils {
 
 

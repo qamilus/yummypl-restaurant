@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * @author Kamil Swislowski
+ */
 public class MenuItemModel {
     private String name;
     private Double price;

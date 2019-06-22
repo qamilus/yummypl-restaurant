@@ -12,6 +12,9 @@ import java.util.List;
 
 import static pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.api.OrderStatusUtils.mapOrderStatus;
 
+/**
+ * @author Kamil Swislowski
+ */
 public class OrderDao {
 
     private static final String SELECT_SQL =

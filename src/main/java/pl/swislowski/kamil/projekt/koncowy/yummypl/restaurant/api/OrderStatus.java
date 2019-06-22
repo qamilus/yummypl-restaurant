@@ -1,5 +1,8 @@
 package pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.api;
 
+/**
+ * @author Kamil Swislowski
+ */
 public enum OrderStatus {
     NEW("New"), IN_PROGRESS("In progress"), DONE("Done"), CANCELED("Canceled");
 
@@ -13,8 +16,4 @@ public enum OrderStatus {
         return name;
     }
 
-//    @Override
-//    public String toString() {
-//        return name;
-//    }
 }

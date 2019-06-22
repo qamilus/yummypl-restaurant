@@ -12,6 +12,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Kamil Swislowski
+ */
 public class RestaurantDao {
 
     private static final String R_ID = "r_id";

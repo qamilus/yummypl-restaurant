@@ -15,6 +15,9 @@ import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.service.Restaurant
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Kamil Swislowski
+ */
 public class RestaurantAddController extends AbstractReservationSystemRestaurantController {
 
     @FXML
