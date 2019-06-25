@@ -1,8 +1,11 @@
 package pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.dao;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.logging.Logger;
 
 /**
@@ -11,27 +14,38 @@ import java.util.logging.Logger;
 public class DatabaseUtils {
     private static final Logger LOGGER = Logger.getLogger(DatabaseUtils.class.getName());
 
-//    private static final String URL = "jdbc:postgresql://localhost:5432/Kamil";
-//    private static final String USER = "Kamil";
-//    private static final String PASSWORD = "Kamil";
-
-//    private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-//    private static final String USER = "kamil";
-//    private static final String PASSWORD = "kamil";
-
-    private static final String URL = "jdbc:postgresql://ec2-46-137-187-23.eu-west-1.compute.amazonaws.com:5432/d2tm1rok342quh";
-    private static final String USER = "nsyqsspaiyipmj";
-    private static final String PASSWORD = "c0b5757a7ac21ac3935ffe260eaea91200ac6b33d52bab9ee9713a0379253e88";
+    private static final String DATA_SOURCE_PROPERTIES = "data-source.properties";
+    private static final String DATA_SOURCE_URL = "data.source.url";
+    private static final String DATA_SOURCE_USER = "data.source.user";
+    private static final String DATA_SOURCE_PASSWORD = "data.source.password";
 
     private static Connection connection;
 
     public static Connection getConnection() throws SQLException {
         LOGGER.info("Acquiring connection ...");
+        Properties dataSourceProperties = getDataSourceProperties();
+        String url = dataSourceProperties.getProperty(DATA_SOURCE_URL);
+        String user = dataSourceProperties.getProperty(DATA_SOURCE_USER);
+        String password = dataSourceProperties.getProperty(DATA_SOURCE_PASSWORD);
+
         if (connection == null) {
 //            connection = DriverManager.getConnection(URL);
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            connection = DriverManager.getConnection(url, user, password);
         }
         return connection;
+    }
+
+    private static Properties getDataSourceProperties() {
+        InputStream propertiesInputStream = DatabaseUtils.class.getClassLoader().getResourceAsStream(DATA_SOURCE_PROPERTIES);
+        Properties properties = new Properties();
+
+        try {
+            properties.load(propertiesInputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return properties;
     }
 
     public static void closeConnection() {
