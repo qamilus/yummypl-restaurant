@@ -13,9 +13,20 @@ import java.util.List;
 import static pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.api.OrderStatusUtils.mapOrderStatus;
 
 /**
+ * DAO(Data Access Object) zapewnia dostęp do tabeli ORDERS w bazie danych.
+ * Udostępnia podstawowe operacje na tabeli np. wstawianie danych do tabeli oraz pobieranie wszystkich wierszy z tabeli.
+ *
  * @author Kamil Swislowski
  */
 public class OrderDao {
+
+    private static final String O_ID = "o_id";
+    private static final String ORDERS_STATUS = "ORDERS_STATUS";
+    private static final String ITEMS_COUNT = "ITEMS_COUNT";
+    private static final String L_ID = "l_id";
+    private static final String CITY = "city";
+    private static final String STREET = "street";
+    private static final String HOUSE_NUMBER = "house_number";
 
     private static final String SELECT_SQL =
             "SELECT O.ID AS O_ID, OS.NAME AS ORDERS_STATUS, L.ID AS L_ID, L.CITY, L.STREET, L.HOUSE_NUMBER, " +
@@ -33,16 +44,14 @@ public class OrderDao {
             "UPDATE ORDERS " +
                     "SET ORDER_STATUS_ID = ? " +
                     "WHERE ID = ?";
-    private static final String O_ID = "o_id";
-    private static final String ORDERS_STATUS = "ORDERS_STATUS";
-    private static final String ITEMS_COUNT = "ITEMS_COUNT";
-    private static final String L_ID = "l_id";
-    private static final String CITY = "city";
-    private static final String STREET = "street";
-    private static final String HOUSE_NUMBER = "house_number";
 
-    private OrderStatusDao orderStatusDao = new OrderStatusDao();
-
+    /**
+     * Pobiera i zwraca wszystkie wiersze z tabeli ORDERS.
+     *
+     * @param restaurantId Identyfikator/klucz główny Restauracji dla której będą zwracane zamówienia.
+     * @return Lista wszystkich zamówień dla wybranej Restauracji.
+     * @throws SQLException Wyjątek zawierający informacje o błędach z bazy danych.
+     */
     public List<Order> list(Long restaurantId) throws SQLException {
         Connection connection = DatabaseUtils.getConnection();
         List<Order> orders = new ArrayList<>();
@@ -76,7 +85,14 @@ public class OrderDao {
         return orders;
     }
 
+    /**
+     * Zmiana statusu zamówienia w tabeli ORDERS.
+     *
+     * @param order Wybrane zamówienie zawierające nowy status.
+     * @throws SQLException Wyjątek zawierający informacje o błędach z bazy danych.
+     */
     public void update(Order order) throws SQLException {
+        OrderStatusDao orderStatusDao = new OrderStatusDao();
         Connection connection = DatabaseUtils.getConnection();
 
         long orderId = order.getId();

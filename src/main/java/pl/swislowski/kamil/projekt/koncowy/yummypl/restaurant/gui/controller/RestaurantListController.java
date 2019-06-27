@@ -14,14 +14,13 @@ import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.gui.model.Restaura
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.service.RestaurantService;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 /**
+ * Kontroler obsługujący widok i model dla GUI. JavaFX MVC - Model View Controller.
+ *
  * @author Kamil Swislowski
  */
 public class RestaurantListController extends AbstractReservationSystemRestaurantController {
-
-    private static final Logger LOGGER = Logger.getLogger(RestaurantListController.class.getName());
 
     private RestaurantService restaurantService;
 
@@ -39,6 +38,10 @@ public class RestaurantListController extends AbstractReservationSystemRestauran
     @FXML
     private Button orderListButton;
 
+    /**
+     * Metoda inicjalizująca elementy widoku na podstawie danych z modelu.
+     * Metoda domyślnie wywoływana przez JavaFX.
+     */
     public void initialize() {
 
         RestaurantDao restaurantDao = new RestaurantDao();
@@ -61,6 +64,9 @@ public class RestaurantListController extends AbstractReservationSystemRestauran
         });
     }
 
+    /**
+     * Obsługa przycisku wyświetlające listę zamówień.
+     */
     public void ordersListButtonOnAction() {
         FXMLLoader loader = new FXMLLoader(OrderListController.class.getClassLoader().getResource("views/orderListView.fxml"));
 
@@ -78,7 +84,10 @@ public class RestaurantListController extends AbstractReservationSystemRestauran
         }
     }
 
-    public void addNewRestaurantButtonAction(){
+    /**
+     * Obsługa przycisku dodającego nową Restaurację.
+     */
+    public void addNewRestaurantButtonAction() {
         FXMLLoader loader = new FXMLLoader(OrderListController.class.getClassLoader().getResource("views/restaurantAddView.fxml"));
         try {
             Stage stage = ReservationSystemRestaurantUtilsController.createStage(loader, primaryStage, "Dodawanie nowej restauracji");
@@ -97,7 +106,10 @@ public class RestaurantListController extends AbstractReservationSystemRestauran
         }
     }
 
-    public void closeButtonAction(){
+    /**
+     * Obsługa przycisku zamykającego okno z listą Restauracji.
+     */
+    public void closeButtonAction() {
         primaryStage.close();
     }
 }

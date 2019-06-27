@@ -5,6 +5,8 @@ import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.api.OrderStatus;
 import java.util.List;
 
 /**
+ * POJO przechowujące informacje o Zamówieniu dla bazy danych.
+ *
  * @author Kamil Swislowski
  */
 public class Order {

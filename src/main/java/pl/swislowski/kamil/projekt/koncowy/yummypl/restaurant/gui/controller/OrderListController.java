@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 /**
+ * Kontroler obsługujący widok i model dla GUI. JavaFX MVC - Model View Controller.
+ *
  * @author Kamil Swislowski
  */
 public class OrderListController extends AbstractReservationSystemRestaurantController {
@@ -49,6 +51,10 @@ public class OrderListController extends AbstractReservationSystemRestaurantCont
     @FXML
     private Button orderDetailsButton;
 
+    /**
+     * Metoda inicjalizująca elementy widoku na podstawie danych z modelu.
+     * Metoda domyślnie wywoływana przez JavaFX.
+     */
     public void initialize() {
         idColumn.setCellValueFactory(new PropertyValueFactory<OrderModel, String>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<OrderModel, String>("restaurantName"));
@@ -75,6 +81,11 @@ public class OrderListController extends AbstractReservationSystemRestaurantCont
         });
     }
 
+    /**
+     * Metoda uzupełniająca dane w TableView.
+     *
+     * @param restaurantModel Jako argument restaurantModel.
+     */
     public void populate(RestaurantModel restaurantModel) {
         this.restaurantModel = restaurantModel;
 
@@ -87,6 +98,9 @@ public class OrderListController extends AbstractReservationSystemRestaurantCont
         }
     }
 
+    /**
+     * Metoda obsługjąca zmianę statusu dla konkretnego zamówienia.
+     */
     public void updateButtonOnAction() {
         LOGGER.info("Updating order...");
         OrderModel orderModel = ordersListTable.getSelectionModel().getSelectedItem();
@@ -102,6 +116,9 @@ public class OrderListController extends AbstractReservationSystemRestaurantCont
         }
     }
 
+    /**
+     * Metoda wyświetlająca okno ze szczegółami zamówienia.
+     */
     public void detailsOfTheOrderButtonAction() {
         LOGGER.info("Loading details of the order...");
 
@@ -123,25 +140,9 @@ public class OrderListController extends AbstractReservationSystemRestaurantCont
         }
     }
 
-    public void addNewOrderButtonAction() {
-        LOGGER.info("Adding new order...");
-
-        FXMLLoader loader = new FXMLLoader(OrderItemListController.class.getClassLoader().getResource("views/orderAddView.fxml"));
-
-        try {
-            Stage stage = ReservationSystemRestaurantUtilsController.createStage(loader, primaryStage, "Dodawanie nowego zamówienia:");
-            OrderAddController controller = loader.getController();
-
-            OrderModel orderModel = ordersListTable.getSelectionModel().getSelectedItem();
-//            controller.populate(orderModel, restaurantModel);
-
-            controller.setPrimaryStage(stage);
-            stage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * Obsługa przycisku zamykającego oknto z listą zamówień.
+     */
     public void closeButtonAction() {
         primaryStage.close();
     }

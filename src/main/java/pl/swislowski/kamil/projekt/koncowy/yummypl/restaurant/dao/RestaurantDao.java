@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * DAO(Data Access Object) zapewnia dostęp do tabeli RESTAURANTS w bazie danych.
+ * Udostępnia podstawowe operacje na tabeli np. wstawianie danych do tabeli oraz pobieranie wszystkich wierszy z tabeli.
+ *
  * @author Kamil Swislowski
  */
 public class RestaurantDao {
@@ -27,27 +30,35 @@ public class RestaurantDao {
     private static final String STREET = "street";
     private static final String HOUSE_NUMBER = "house_number";
 
+    private static final String SELECT_SQL =
+            "SELECT R.ID AS R_ID, R.NAME AS RESTAURANT_NAME, L.ID AS L_ID, L.CITY, L.STREET, L.HOUSE_NUMBER, LT.NAME AS LOCATION_TYPE, RI.ID AS RI_ID, RI.OPENING_HOURS " +
+            "FROM RESTAURANTS R " +
+            "LEFT JOIN RESTAURANTS_INFORMATION RI " +
+            "    ON R.ID = RI.RESTAURANT_ID " +
+            "LEFT JOIN LOCATIONS L " +
+            "    ON R.LOCATION_ID = L.ID " +
+            "LEFT JOIN LOCATIONS_TYPE LT " +
+            "    ON L.LOCATION_TYPE_ID = LT.ID " +
+            "WHERE LT.ID = 1 " +
+            "ORDER BY R_ID ASC";
+
     private static final String INSERT_SQL =
             "INSERT INTO RESTAURANTS(ID, NAME, LOCATION_ID) VALUES (nextval('RESTAURANTS_ID_SEQ'), ?, ?) ";
 
     private Connection connection;
 
+    /**
+     * Pobiera i zwraca wszystkie wiersze z tabeli RESTAURANTS.
+     *
+     * @return Lista wszystkich restauracji.
+     * @throws SQLException Wyjątek zawierający informacje o błędach z bazy danych.
+     */
     public List<Restaurant> list() throws SQLException {
         connection = DatabaseUtils.getConnection();
         List<Restaurant> restaurants = new ArrayList<>();
 
         try (Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery(
-                    "SELECT R.ID AS R_ID, R.NAME AS RESTAURANT_NAME, L.ID AS L_ID, L.CITY, L.STREET, L.HOUSE_NUMBER, LT.NAME AS LOCATION_TYPE, RI.ID AS RI_ID, RI.OPENING_HOURS " +
-                            "FROM RESTAURANTS R " +
-                            "LEFT JOIN RESTAURANTS_INFORMATION RI " +
-                            "    ON R.ID = RI.RESTAURANT_ID " +
-                            "LEFT JOIN LOCATIONS L " +
-                            "    ON R.LOCATION_ID = L.ID " +
-                            "LEFT JOIN LOCATIONS_TYPE LT " +
-                            "    ON L.LOCATION_TYPE_ID = LT.ID " +
-                            "WHERE LT.ID = 1 " +
-                            "ORDER BY R_ID ASC");
+            ResultSet resultSet = statement.executeQuery(SELECT_SQL);
 
             while (resultSet.next()) {
                 Restaurant restaurant = new Restaurant();
@@ -82,6 +93,13 @@ public class RestaurantDao {
         return restaurants;
     }
 
+    /**
+     * Zapisuje do tabeli RESTAURANTS i zwraca identyfikator nowego wiersza/klucza głównego dla RESTAURANTS w bazie danych.
+     *
+     * @param restaurant Obiekt Restaurant, który ma zostać zapisany w bazie w tabeli RESTAURANTS.
+     * @param location   Obiekt Location, który ma zostać połączony z tabelą RESTAURANTS i zapisany w bazie w tabeli LOCATIONS.
+     * @return Identyfikator nowego wiersza/klucza głównego dla RESTAURANTS w bazie danych.
+     */
     public long create(Restaurant restaurant, Location location) {
         long generatedId = -1;
 

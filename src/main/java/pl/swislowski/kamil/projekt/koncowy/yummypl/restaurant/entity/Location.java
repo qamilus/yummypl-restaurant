@@ -1,6 +1,8 @@
 package pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity;
 
 /**
+ * POJO przechowujące informacje o Lokalizacji dla bazy danych.
+ *
  * @author Kamil Swislowski
  */
 public class Location {

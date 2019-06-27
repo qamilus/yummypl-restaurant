@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Kontroler obsługujący widok i model dla GUI. JavaFX MVC - Model View Controller.
+ *
  * @author Kamil Swislowski
  */
 public class RestaurantAddController extends AbstractReservationSystemRestaurantController {
@@ -33,6 +35,10 @@ public class RestaurantAddController extends AbstractReservationSystemRestaurant
 
     private List<TextField> textFields = new ArrayList<>();
 
+    /**
+     * Metoda inicjalizująca elementy widoku na podstawie danych z modelu.
+     * Metoda domyślnie wywoływana przez JavaFX.
+     */
     public void initialize() {
         textFields.add(nameTextField);
         textFields.add(locationCityTextField);
@@ -41,6 +47,9 @@ public class RestaurantAddController extends AbstractReservationSystemRestaurant
         textFields.add(openningHoursTextField);
     }
 
+    /**
+     * Obsługa przycisku zapisującego nową Restaurację.
+     */
     public void saveRestaurantButtonOnAction() {
         if (validateAllTextFields()) {
 
@@ -71,10 +80,18 @@ public class RestaurantAddController extends AbstractReservationSystemRestaurant
         }
     }
 
+    /**
+     * Obsługa przycisku zamykającego okno z dodawaniem nowej Restauracji.
+     */
     public void closeButtonAction() {
         primaryStage.close();
     }
 
+    /**
+     * Metoda sprawdzająca czy wszystkie pola tekstowe w GUI dodawania nowej Restauracji zostały uzupełnione.
+     *
+     * @return Boolean
+     */
     private boolean validateAllTextFields() {
         boolean valid = true;
 

@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
+ * Usługi związane z logiką biznesową dla Zamówienia. Łącznik pomiędzy warstwą prezentacji(JavaFX) i DAO.
+ *
  * @author Kamil Swislowski
  */
 public class OrderService {
@@ -21,10 +23,22 @@ public class OrderService {
 
     private OrderDao orderDao;
 
+    /**
+     * Konstruktor do którego przekazujemy DAO dla <code>{@link Order}</code>.
+     *
+     * @param orderDao DAO dla <code>{@link Order}</code>
+     */
     public OrderService(OrderDao orderDao) {
         this.orderDao = orderDao;
     }
 
+    /**
+     * Zwraca listę wszystkich zamówień w postaci modelu dla GUI.
+     * Zamienia encje pochodzące z bazy danych <code>{@link Order}</code> na model <code>{@link OrderModel}</code> dla GUI.
+     *
+     * @param restaurantModel Dostajemy się w taki sposób do <code>{@link RestaurantModel}</code>
+     * @return Lista wszystkich zamówień.
+     */
     public List<OrderModel> list(RestaurantModel restaurantModel) {
 
         List<OrderModel> orderModelList = new ArrayList<>();
@@ -55,7 +69,10 @@ public class OrderService {
         }
         return orderModelList;
     }
-
+//TODO:
+    /**
+     * @param orderModel
+     */
     public void update(OrderModel orderModel) {
         LOGGER.info("Updating model...");
         if (orderModel != null) {

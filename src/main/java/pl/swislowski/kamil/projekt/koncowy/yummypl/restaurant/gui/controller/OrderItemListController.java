@@ -16,6 +16,8 @@ import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.service.OrderItemS
 import java.util.logging.Logger;
 
 /**
+ * Kontroler obsługujący widok i model dla GUI. JavaFX MVC - Model View Controller.
+ *
  * @author Kamil Swislowski
  */
 public class OrderItemListController extends AbstractReservationSystemRestaurantController {
@@ -45,6 +47,10 @@ public class OrderItemListController extends AbstractReservationSystemRestaurant
     @FXML
     private Label deliveryAddressLabelId;
 
+    /**
+     * Metoda inicjalizująca elementy widoku na podstawie danych z modelu.
+     * Metoda domyślnie wywoływana przez JavaFX.
+     */
     public void initialize() {
         idColumn.setCellValueFactory(new PropertyValueFactory<OrderItemModel, String>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<OrderItemModel, String>("name"));
@@ -53,6 +59,12 @@ public class OrderItemListController extends AbstractReservationSystemRestaurant
         sumColumn.setCellValueFactory(new PropertyValueFactory<OrderItemModel, String>("sum"));
     }
 
+    /**
+     * Metoda obsługujących wyświetlanie konkretnych informacji(w labelach) o zamówieniu w oknie ze szczegółami zamówienia.
+     *
+     * @param orderModel      Podany jako argument w celu wyciągania z niego danych.
+     * @param restaurantModel Podany jako argument w celu wyciągania z niego danych.
+     */
     public void populate(OrderModel orderModel, RestaurantModel restaurantModel) {
         LOGGER.info("OrderModel : " + orderModel);
         LOGGER.info("RestaurantModel : " + restaurantModel);
@@ -72,7 +84,10 @@ public class OrderItemListController extends AbstractReservationSystemRestaurant
         }
     }
 
-    public void closeButtonAction(){
+    /**
+     * Obsługa przycisku zamykającego okno ze szczegółami zamówienia.
+     */
+    public void closeButtonAction() {
         primaryStage.close();
     }
 }

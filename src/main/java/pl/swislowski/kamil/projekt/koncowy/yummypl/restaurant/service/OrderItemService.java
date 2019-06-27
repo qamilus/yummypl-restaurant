@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
+ * Usługi związane z logiką biznesową dla elementów wchodzących w skład zamówienia. Łącznik pomiędzy warstwą prezentacji(JavaFX) i DAO.
+ *
  * @author Kamil Swislowski
  */
 public class OrderItemService {
@@ -20,6 +22,11 @@ public class OrderItemService {
 
     private OrderItemDao orderItemDao;
 
+    /**
+     * Konstruktor do którego przekazujemy DAO dla <code>{@link OrderItem}</code>.
+     *
+     * @param orderItemDao DAO dla <code>{@link OrderItem}</code>.
+     */
     public OrderItemService(OrderItemDao orderItemDao) {
         this.orderItemDao = orderItemDao;
     }

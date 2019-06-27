@@ -1,6 +1,8 @@
 package pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.api;
 
 /**
+ * Typ wyliczeniowy przechowujący stałe reprezentujące statusy zamówienia.
+ *
  * @author Kamil Swislowski
  */
 public enum OrderStatus {

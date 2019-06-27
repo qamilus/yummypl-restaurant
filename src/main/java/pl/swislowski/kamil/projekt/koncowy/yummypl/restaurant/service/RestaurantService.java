@@ -17,26 +17,37 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-//S.O.L.I.D.
-//S(single responsibility) - RestaurantService jest odpowiedzialny tylko i wyłącznie za przekazywanie danych.
+
 /**
+ * Usługi związane z logiką biznesową dla Restauracji. Łącznik pomiędzy warstwą prezentacji(JavaFX) i DAO.
+ *
  * @author Kamil Swislowski
  */
 public class RestaurantService {
     private static final Logger LOGGER = Logger.getLogger(RestaurantService.class.getName());
-    //kompozycja wykorzystująca implementację DAO.
+
     private RestaurantDao restaurantDao;
     private LocationDao locationDao;
     private RestaurantInformationDao restaurantInformationDao;
 
+    /**
+     * Konstruktor do którego przekazujemy DAO dla <code>{@link Restaurant}</code>.
+     *
+     * @param restaurantDao DAO dla <code>{@link Restaurant}</code>.
+     */
     public RestaurantService(RestaurantDao restaurantDao) {
         this.restaurantDao = restaurantDao;
     }
 
+    /**
+     * Zwraca listę wszystkich restauracji w postaci modelu dla GUI.
+     * Zamienia encje pochodzące z bazy danych <code>{@link Restaurant}</code> na model <code>{@link RestaurantModel}</code> dla GUI.
+     *
+     * @return Lista wszystkich restauracji.
+     */
     public List<RestaurantModel> list() {
         List<RestaurantModel> restaurantModelList = new ArrayList<>();
         try {
-            //delegacja wywołania metody list z DAO.
             final List<Restaurant> restaurantEntityList = restaurantDao.list();
 
             LOGGER.info("RestaurantList from DAO : " + restaurantEntityList);
@@ -71,6 +82,12 @@ public class RestaurantService {
         return restaurantModelList;
     }
 
+    /**
+     * Zapisuje do bazy danych nową Restaurację.
+     * Zamienia model <code>{@link RestaurantModel}</code> dla GUI na encje z bazy danych <code>{@link Restaurant}</code>.
+     *
+     * @param restaurantModel Dane nowej Restauracji, którą należy zapisać w bazie danych.
+     */
     public void create(RestaurantModel restaurantModel) {
         Restaurant restaurant = RestaurantModelMapper.toEntity(restaurantModel);
         Location location = LocationModelMapper.toEntity(restaurantModel.getLocationModel());
@@ -86,10 +103,20 @@ public class RestaurantService {
         restaurantInformationDao.create(restaurantInformation);
     }
 
+    /**
+     * Przekazuje i ustawia DAO dla tabeli LOCATIONS.
+     *
+     * @param locationDao DAO dla tabeli LOCATIONS.
+     */
     public void setLocationDao(LocationDao locationDao) {
         this.locationDao = locationDao;
     }
 
+    /**
+     * Przekazuje i ustawia DAO dla tabeli RESTAURANTS_INFORMATION.
+     *
+     * @param restaurantInformationDao DAO dla tabeli RESTAURANTS_INFORMATION.
+     */
     public void setRestaurantInformationDao(RestaurantInformationDao restaurantInformationDao) {
         this.restaurantInformationDao = restaurantInformationDao;
     }

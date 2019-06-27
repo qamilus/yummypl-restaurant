@@ -3,6 +3,8 @@ package pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity;
 import java.util.List;
 
 /**
+ * POJO przechowujące informacje o Menu dla bazy danych.
+ *
  * @author Kamil Swislowski
  */
 public class Menu {

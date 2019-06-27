@@ -6,8 +6,11 @@ import org.junit.Before;
 import org.junit.Test;
 import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity.Location;
 
-import static org.junit.Assert.*;
-
+/**
+ * Testy jednostkowe dla <code>{@link LocationDao}</code>.
+ *
+ * @author Kamil Swislowski
+ */
 public class LocationDaoTest {
     private LocationDao locationDao;
 
@@ -21,6 +24,9 @@ public class LocationDaoTest {
         locationDao = null;
     }
 
+    /**
+     * Test jednostkowy weryfikujący tworzenie i zapisywanie do tabeli LOCATIONS.
+     */
     @Test
     public void create() {
         Location location = new Location("Warszawa - Test", "Marszałkowska - Test", "22 - Test");
