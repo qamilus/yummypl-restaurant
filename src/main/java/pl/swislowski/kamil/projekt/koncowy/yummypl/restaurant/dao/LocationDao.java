@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
+ * DAO(Data Access Object) zapewnia dostęp do tabeli LOCATIONS w bazie danych.
+ * Udostępnia podstawowe operacje na tabeli np. wstawianie danych do tabeli.
+ *
  * @author Kamil Swislowski
  */
 public class LocationDao {
@@ -16,6 +19,12 @@ public class LocationDao {
     private static final String INSERT_SQL =
             "INSERT INTO LOCATIONS(ID, CITY, STREET, HOUSE_NUMBER, location_type_id) VALUES (nextval('LOCATIONS_ID_SEQ'), ?, ?, ?, 1)";
 
+    /**
+     * Zapisuje do tabeli LOCATIONS i zwraca identyfikator nowego wiersza/klucza głównego dla LOCATIONS w bazie danych.
+     *
+     * @param location Obiekt Location, który ma zostać zapisany w bazie w tabeli LOCATIONS.
+     * @return Identyfikator nowego wiersza/klucza głównego dla LOCATIONS w bazie danych.
+     */
     public long create(Location location) {
         long generatedId = -1;
 

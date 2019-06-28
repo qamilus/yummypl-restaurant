@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * DAO(Data Access Object) zapewnia dostęp do tabeli ORDERS_ITEMS w bazie danych.
+ * Udostępnia podstawowe operacje na tabeli np. pobieranie wszystkich wierszy z tabeli.
+ *
  * @author Kamil Swislowski
  */
 public class OrderItemDao {
@@ -21,6 +24,13 @@ public class OrderItemDao {
             "                   ON OI.ORDER_ID = O.ID " +
             "WHERE O.ID = ?";
 
+    /**
+     * Pobiera i zwraca odpowiednie(LEFT JOIN) wiersze z tabel ORDERS I ORDERS_ITEMS.
+     *
+     * @param orderId Identyfikator/klucz główny Zamówienia dla którego będą zwracane OrderItems.
+     * @return Lista wszystkich OrderItem dla wybranego zamówienia.
+     * @throws SQLException Wyjątek zawierający informacje o błędach z bazy danych.
+     */
     public List<OrderItem> list(long orderId) throws SQLException {
         Connection connection = DatabaseUtils.getConnection();
         List<OrderItem> orderItems = new ArrayList<>();

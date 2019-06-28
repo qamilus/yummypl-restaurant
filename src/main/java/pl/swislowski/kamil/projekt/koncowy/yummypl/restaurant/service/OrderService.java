@@ -69,9 +69,11 @@ public class OrderService {
         }
         return orderModelList;
     }
-//TODO:
+
     /**
-     * @param orderModel
+     * Metoda aktualizująca status zamówienia w OrderModel.
+     *
+     * @param orderModel Podany żeby mieć do niego swobodny dostęp.
      */
     public void update(OrderModel orderModel) {
         LOGGER.info("Updating model...");

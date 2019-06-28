@@ -14,11 +14,17 @@ import pl.swislowski.kamil.projekt.koncowy.yummypl.restaurant.entity.Location;
 public class LocationDaoTest {
     private LocationDao locationDao;
 
+    /**
+     * Metoda wywoływana przez bibliotekę JUnit przed każdą metodą oznaczoną <code>@Test</code>.
+     */
     @Before
     public void setUp() {
         locationDao = new LocationDao();
     }
 
+    /**
+     * Metoda wywoływana przez bibliotekę JUnit po każdej metodzie oznaczonej <code>@Test</code>.
+     */
     @After
     public void tearDown() {
         locationDao = null;

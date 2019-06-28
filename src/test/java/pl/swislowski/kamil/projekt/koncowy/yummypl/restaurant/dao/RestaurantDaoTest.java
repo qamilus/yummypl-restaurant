@@ -17,12 +17,18 @@ public class RestaurantDaoTest {
     private LocationDao locationDao;
     private RestaurantDao restaurantDao;
 
+    /**
+     * Metoda wywoływana przez bibliotekę JUnit przed każdą metodą oznaczoną <code>@Test</code>.
+     */
     @Before
     public void setUp() {
         locationDao = new LocationDao();
         restaurantDao = new RestaurantDao();
     }
 
+    /**
+     * Metoda wywoływana przez bibliotekę JUnit po każdej metodzie oznaczonej <code>@Test</code>.
+     */
     @After
     public void tearDown() {
         locationDao = null;

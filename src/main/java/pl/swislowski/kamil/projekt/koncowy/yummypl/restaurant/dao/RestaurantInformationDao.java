@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
+ * DAO(Data Access Object) zapewnia dostęp do tabeli RESTAURANTS_INFORMATION w bazie danych.
+ * Udostępnia podstawowe operacje na tabeli np. wstawianie danych do tabeli oraz pobieranie wszystkich wierszy z tabeli.
+ *
  * @author Kamil Swislowski
  */
 public class RestaurantInformationDao {
@@ -17,6 +20,12 @@ public class RestaurantInformationDao {
             "INSERT INTO RESTAURANTS_INFORMATION(ID, opening_hours, restaurant_id) " +
                     "VALUES (nextval('RESTAURANTS_INFORMATION_ID_SEQ'), ?, ?)";
 
+    /**
+     * Zapisuje do tabeli RESTAURANTS_INFORMATION i zwraca identyfikator nowego wiersza/klucza głównego dla RESTAURANTS_INFORMATION w bazie danych.
+     *
+     * @param restaurantInformation Obiekt RestaurantInformation, który ma zostać zapisany w bazie w tabeli RESTAURANTS_INFORMATION.
+     * @return Identyfikator nowego wiersza/klucza głównego dla RESTAURANTS_INFORMATION w bazie danych.
+     */
     public long create(RestaurantInformation restaurantInformation) {
         long generatedId = -1;
 
